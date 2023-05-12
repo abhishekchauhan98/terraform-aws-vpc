@@ -25,11 +25,21 @@ module "elastic_ip" {
   }))
 }
 
-module "nat_gateway" {
+module "nat_gateway1" {
   depends_on    = [module.subnets_module_advance, module.elastic_ip]
   source        = "../nat-gateway"
   allocation_id = module.elastic_ip.eip_id
   subnet_id     = values(lookup(tomap({ for k, bd in module.subnets_module_advance : k => bd.subnet_id }), local.public_subnet_name, {}))[0]
+  tags = merge(var.common_tags, tomap({
+    "Name" : "${var.project_name_prefix}-nat-gateway"
+  }))
+}
+
+module "nat_gateway2" {
+  depends_on    = [module.subnets_module_advance, module.elastic_ip]
+  source        = "../nat-gateway"
+  allocation_id = module.elastic_ip.eip_id
+  subnet_id     = values(lookup(tomap({ for k, bd in module.subnets_module_advance : k => bd.subnet_id }), local.public_subnet_name, {}))[1]
   tags = merge(var.common_tags, tomap({
     "Name" : "${var.project_name_prefix}-nat-gateway"
   }))
