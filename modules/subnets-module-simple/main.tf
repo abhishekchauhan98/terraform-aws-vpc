@@ -71,7 +71,7 @@ module "route_table2" {
   # count      = var.is_public ? 0 : 1
   source     = "../route-table/private"
   vpc_id     = var.vpc_id
-  cidr_block = var.cidr_block
+  cidr_block = "0.0.0.0/0"
   gateway_id = module.nat_gateway2.nat_gateway_id
   tags = merge(var.common_tags, tomap({
     "Name" : "${var.project_name_prefix}-route-table"
