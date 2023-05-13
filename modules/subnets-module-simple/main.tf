@@ -88,9 +88,8 @@ module "route_table_association" {
 }
 
 module "route_table_association2" {
-  depends_on     = [module.subnets_module_simple, module.route_table2]
-  source         = "../route-table-association-module"
-  subnet_ids     = [values(lookup(tomap({ for k, bd in module.subnets_module_simple : k => bd.subnet_id }), local.public_subnet_name, {}))[1]]
+  source         = "../route-table-association"
+  subnet_id      = values(lookup(tomap({ for k, bd in module.subnets_module_simple : k => bd.subnet_id }), local.public_subnet_name, {}))[1]
   route_table_id = module.route_table2.route_table_id
 }
 
