@@ -74,7 +74,7 @@ module "route_table2" {
   cidr_block = var.cidr_block
   gateway_id = module.nat_gateway2.nat_gateway_id
   tags = merge(var.common_tags, tomap({
-    "Name" : "${var.project_name_prefix}-${var.name}-2"
+    "Name" : "${var.project_name_prefix}-${var.name}-new"
   }))
   nat_gateway = true
 }
@@ -107,7 +107,7 @@ module "additional_subnets_module" {
 }
 
 module "additional_route_table" {
-  depends_on          = [module.internet_gateway, module.nat_gateway]
+  depends_on          = [module.internet_gateway, module.nat_gateway1]
   for_each            = var.additional_subnet_group
   source              = "../route-table-module"
   vpc_id              = var.vpc_id

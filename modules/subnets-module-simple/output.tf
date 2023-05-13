@@ -14,8 +14,12 @@ output "route_table_id" {
   value = tomap({ for k, bd in module.route_table : k => bd.route_table_id })
 }
 
-output "eip_id" {
-  value = module.elastic_ip.eip_id
+output "eip_id1" {
+  value = module.elastic_ip1.eip_id
+}
+
+output "eip_id1" {
+  value = module.elastic_ip2.eip_id
 }
 
 output "subnet_ids" {

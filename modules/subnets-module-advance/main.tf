@@ -51,7 +51,7 @@ module "route_table" {
   source              = "../route-table-module"
   vpc_id              = var.vpc_id
   internet_gateway_id = module.internet_gateway.internet_gateway_id
-  nat_gateway_id      = module.nat_gateway.nat_gateway_id
+  nat_gateway_id      = module.nat_gateway1.nat_gateway_id
   common_tags         = var.common_tags
   project_name_prefix = var.project_name_prefix
   name                = each.key
