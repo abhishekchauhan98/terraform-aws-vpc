@@ -16,7 +16,7 @@ module "route_table_private" {
   cidr_block = var.cidr_block
   gateway_id = var.nat_gateway_id
   tags = merge(var.common_tags, tomap({
-    "Name" : "${var.project_name_prefix}-${var.name}"
+    "Name" : "${var.project_name_prefix}-new"
   }))
   nat_gateway = var.nat_gateway
 }
