@@ -82,13 +82,14 @@ module "route_table2" {
 module "route_table_association" {
   depends_on     = [module.subnets_module_simple, module.route_table]
   for_each       = var.subnet_group
-  source         = "../route-table-association-module"
+  source         = "../route-table-association-module/simple"
   subnet_ids     = lookup(tomap({ for k, bd in module.subnets_module_simple : k => bd.subnet_id }), each.key, {})
   route_table_id = lookup(tomap({ for k, bd in module.route_table : k => bd.route_table_id }), each.key, "undefined")
 }
 
 module "route_table_association2" {
-  source         = "../route-table-association"
+  tagName        = "${var.project_name_prefix}-nat-gateway"
+  source         = "../route-table-association/advance"
   subnet_id      = values(lookup(tomap({ for k, bd in module.subnets_module_simple : k => bd.subnet_id }), local.public_subnet_name, {}))[1]
   route_table_id = module.route_table2.route_table_id
 }
