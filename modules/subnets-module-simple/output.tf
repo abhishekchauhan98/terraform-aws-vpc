@@ -18,7 +18,7 @@ output "eip_id1" {
   value = module.elastic_ip1.eip_id
 }
 
-output "eip_id1" {
+output "eip_id2" {
   value = module.elastic_ip2.eip_id
 }
 
