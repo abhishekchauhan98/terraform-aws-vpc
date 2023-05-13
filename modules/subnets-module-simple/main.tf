@@ -88,7 +88,6 @@ module "route_table_association" {
 }
 
 module "route_table_association2" {
-  tagName        = "${var.project_name_prefix}-nat-gateway"
   source         = "../route-table-association/advance"
   subnet_id      = values(lookup(tomap({ for k, bd in module.subnets_module_simple : k => bd.subnet_id }), local.public_subnet_name, {}))[1]
   route_table_id = module.route_table2.route_table_id
