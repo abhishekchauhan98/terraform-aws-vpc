@@ -68,21 +68,6 @@ module "route_table" {
 }
 
 module "route_table2" {
-  depends_on          = [module.nat_gateway2]
-  # for_each            = var.subnet_group
-  source              = "../route-table-module"
-  vpc_id              = var.vpc_id
-  internet_gateway_id = module.internet_gateway.internet_gateway_id
-  nat_gateway_id      = module.nat_gateway2.nat_gateway_id
-  common_tags         = var.common_tags
-  project_name_prefix = "${var.project_name_prefix}-extra"
-  name                = each.key
-  is_public           = each.value.is_public
-  nat_gateway         = each.value.nat_gateway
-  cidr_block          = "0.0.0.0/0"
-}
-
-module "route_table2" {
   # count      = var.is_public ? 0 : 1
   source     = "../route-table/private"
   vpc_id     = var.vpc_id
