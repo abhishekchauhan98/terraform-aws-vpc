@@ -74,7 +74,7 @@ module "route_table2" {
   cidr_block = var.cidr_block
   gateway_id = module.nat_gateway2.nat_gateway_id
   tags = merge(var.common_tags, tomap({
-    "Name" : "${var.project_name_prefix}-${var.name}-new"
+    "Name" : "${var.project_name_prefix}-route-table"
   }))
   nat_gateway = true
 }
